@@ -103,7 +103,7 @@ public class CertificateService
                 Width = 260,
                 Margin = 2
             },
-            Renderer = new SKBitmapRenderer()
+            Renderer = new ZXing.SkiaSharp.Rendering.SKBitmapRenderer()
         };
 
         using var bitmap = writer.Write(text);

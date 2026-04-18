@@ -4,7 +4,7 @@ import { AuthResponse, Employee, EmployeeCreateRequest, LoginRequest } from '../
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-  private readonly api = 'http://localhost:5000/api';
+  private readonly api = 'http://localhost:62345/api';
 
   constructor(private http: HttpClient) {}
 
