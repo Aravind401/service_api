@@ -69,6 +69,39 @@ public class AuthController(AppDbContext dbContext) : ControllerBase
 
         return Ok(new { role = "user", userId = user.Id, name = user.EmployeeName, username = user.Username });
     }
+    [HttpGet("health")]
+    public async Task<ActionResult<object>> Health()
+    {
+        try
+        {
+            // Check DB connectivity
+            var canConnect = await dbContext.Database.CanConnectAsync();
+
+            if (!canConnect)
+            {
+                return StatusCode(500, new
+                {
+                    status = "Unhealthy",
+                    database = "Disconnected"
+                });
+            }
+
+            return Ok(new
+            {
+                status = "Healthy",
+                database = "Connected",
+                timestamp = DateTime.UtcNow
+            });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new
+            {
+                status = "Unhealthy",
+                error = ex.Message
+            });
+        }
+    }
 }
 
 public class LoginRequest

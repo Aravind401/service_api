@@ -9,7 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? "server=localhost;database=service_api;user=root;password=blueberry";
+    ?? "server=localhost;database=service_api;user=root;password=enter";
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
@@ -19,7 +19,7 @@ builder.Services.AddScoped<CertificateService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular", policy =>
-        policy.WithOrigins("http://localhost:4200")
+        policy.WithOrigins("http://172.20.32.1:4200")
               .AllowAnyHeader()
               .AllowAnyMethod());
 });
